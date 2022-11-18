@@ -58,6 +58,7 @@ div{
 }
 
 .footer{
+    bottom: 0;
     width: 100%;
     background-color: rgb(238, 240, 240);
     text-align: center;
@@ -69,6 +70,11 @@ div{
 .footer>span>a{
     height: fit-content;
     text-decoration: none;
+}
+
+svg:hover{
+    transform: rotate(360deg);
+    transition: 1s;
 }
 
 button{
@@ -139,4 +145,88 @@ input[type='checkbox']{
 
 input[type='submit']{
     background-color: lightgreen;
+}
+
+input[type='submit']:hover{
+    background-color: rgb(87, 208, 87);
+}
+.book{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    width: 250px;
+    height: 280px;
+    background-color: #fff;
+    border-left: 30px solid rgb(0, 180, 0);
+}
+
+.book>.left{
+    font-weight: 600;
+    font-size: large;
+    grid-column: 1/2;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.book>.right{
+    font-weight: 600;
+    font-size: large;
+    grid-column: 2/3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.read{
+    grid-column: 1/3;
+    grid-row: 2/3;
+}
+
+.read>button{
+    background-color: rgb(0, 180, 0);
+    width: 150px;
+    font-size: large;
+}
+
+.not-read{
+    grid-column: 1/3;
+    grid-row: 2/3;
+}
+
+.not-read>button{
+    background-color: rgb(233, 0, 0);
+    width: 150px;
+    font-size: large;
+}
+
+.remove{
+    grid-column: 1/3;
+}
+
+.remove>button{
+    font-size: large;
+    width: 150px;
+}
+
+.read>button:hover{
+    background-color: rgb(42, 149, 0);
+}
+
+.not-read>button:hover{
+    background-color: rgb(149, 0, 0);
+}
+
+.books{
+    margin: 20px;
+    align-self: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
 }
