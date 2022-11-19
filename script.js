@@ -12,15 +12,29 @@ function Book(title, author, pages, read){
 
 
 function addBookToLibrary(){
+    cover.classList.add('black-back');
     let modal1 = document.querySelector(".modal");
     if(modal1 == null){
         cont.classList.add('askForForm');
         let modal = document.createElement('div');
         modal.classList.add('modal');
-        modal.innerHTML = "<h2>Add your book<h2> <form id='form'><input placeholder='Title' id='title' required><input placeholder='Author(s)' id='author' required><input type=number min=1 placeholder='Pages' id='pages' required><div><label for='did-read'>Have you read it?</label><input type='checkbox' id='did-read'></div><input type='submit' id='submit'></form>"
+        modal.innerHTML = "<h2>Add your book<h2> <form id='form'><input placeholder='Title' id='title' name='title' required><input placeholder='Author(s)' id='author' name='author' required><input type=number min=1 placeholder='Pages' id='pages' name='pages' required><div><label for='did-read'>Have you read it?</label><input type='checkbox' id='did-read'></div><input type='submit' id='submit'></form>"
         body.appendChild(modal)
         submit = document.getElementById('submit');
         submit.addEventListener('click', (e)=> {
+            if(document.forms['form'].elements['title'].value == ""){
+                alert('please enter title!')
+            }
+            else if(document.forms['form'].elements['author'].value == ""){
+                alert("please enter author!");
+            }
+            else if(document.forms['form'].elements['pages'].value == ""){
+                alert("please enter pages!");
+            }
+            else if(document.forms['form'].elements['pages'].value <= 0){
+                alert("please correct the number of pages!");
+            }
+            else{
             title = document.forms['form'].elements['title'].value;
             author = document.forms['form'].elements['author'].value;
             pages = document.forms['form'].elements['pages'].value;
@@ -29,10 +43,11 @@ function addBookToLibrary(){
             modal.remove();
             Array.from(books.children).forEach(book=>{books.removeChild(book)});
             displayBooks();
+            cover.classList.remove('black-back');
+            }
             e.preventDefault();
         })
     }
-
 }
 
 
@@ -56,7 +71,7 @@ function displayBooks(){
             readDiv.classList.add('not-read');
             readDiv.appendChild(readBtn);
             card.appendChild(readDiv);
-            card.style.borderLeft = '30px solid rgb(233, 0, 0)';
+            card.style.borderTop = '30px solid rgb(233, 0, 0)';
         }
         books.appendChild(card);
         book.card = card;
@@ -82,7 +97,7 @@ function readButton(){
         e.target.parentElement.classList.remove('read');
         e.target.parentElement.classList.add('not-read');
         e.target.textContent = "Not read"
-        e.target.parentElement.parentElement.style.borderLeftColor = 'rgb(233, 0, 0)';
+        e.target.parentElement.parentElement.style.borderTopColor = 'rgb(233, 0, 0)';
         myLibrary.forEach(book => {
             if(book.card === e.target.parentElement.parentElement){
                 book.read = false;
@@ -96,7 +111,7 @@ function readButton(){
         e.target.parentElement.classList.remove('not-read');
         e.target.parentElement.classList.add('read');
         e.target.textContent = "Read";
-        e.target.parentElement.parentElement.style.borderLeftColor = 'rgb(0, 180, 0)';
+        e.target.parentElement.parentElement.style.borderTopColor = 'rgb(0, 180, 0)';
         myLibrary.forEach(book => {
             if(book.card === e.target.parentElement.parentElement){
                 book.read = true;
@@ -117,12 +132,14 @@ let title;
 let author;
 let pages;
 let read;
+let cover = document.querySelector('.cover');
 
 
-cont.addEventListener('click', function(e){
+cover.addEventListener('click', function(e){
     let modal1 = document.querySelector(".modal");
-    if(e.target != addBtn && e.target != modal1){
+    if(e.target != modal1){
         if(modal1 != null){
+            cover.classList.remove('black-back')
             let modal = document.querySelector(".modal");
             modal.remove();
         }
