@@ -1,15 +1,15 @@
 let myLibrary = [];
 
 
-function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    haveRead = read ? 'read': 'not read yet';
-    this.info = `${title} by ${author}, ${pages} pages, ${haveRead}.`
+class Book{
+    
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
 }
-
 
 function addBookToLibrary(){
     cover.classList.add('black-back');
